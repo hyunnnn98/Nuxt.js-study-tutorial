@@ -32,6 +32,7 @@ export default {
   methods: {
     moveToDetailPage(productId) {
       console.log(productId)
+      this.$router.push(`detail/${productId}`)
     }
   },
   // data() {
