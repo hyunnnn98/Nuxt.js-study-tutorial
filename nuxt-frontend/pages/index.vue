@@ -1,12 +1,25 @@
 <template>
   <div class="app">
     <main>
-      <div>
-        <input type="text" />
-      </div>
+      <!-- 🤔 v-model 을 사용하지 않는 코드 -->
+      <!-- <SearchInput
+        :search-keyword="searchKeyword"
+        @input="updateSearchKeyword"
+      /> -->
+      <!-- 🤔 v-model 을 사용한 코드 코드 -->
+      <SearchInput v-model="searchKeyword" />
       <ul>
-        <li v-for="product in products" :key="product.id" class="item flex" @click="moveToDetailPage(product.id)">
-          <img class="product-image" :src="product.imageUrl" :alt="product.name" />
+        <li
+          v-for="product in products"
+          :key="product.id"
+          class="item flex"
+          @click="moveToDetailPage(product.id)"
+        >
+          <img
+            class="product-image"
+            :src="product.imageUrl"
+            :alt="product.name"
+          />
           <p>{{ product.name }}</p>
           <span>{{ product.price }}</span>
         </li>
@@ -17,8 +30,10 @@
 
 <script>
 import axios from 'axios'
+import SearchInput from '@/components/SearchInput.vue'
 
 export default {
+  components: { SearchInput },
   async asyncData() {
     const response = await axios.get('http://localhost:3000/products')
     // console.log(response)
@@ -29,17 +44,22 @@ export default {
 
     return { products }
   },
+
+  data() {
+    return {
+      searchKeyword: '',
+    }
+  },
+
   methods: {
     moveToDetailPage(productId) {
       console.log(productId)
       this.$router.push(`detail/${productId}`)
-    }
+    },
+    updateSearchKeyword(keyword) {
+      this.searchKeyword = keyword
+    },
   },
-  // data() {
-  //   return {
-  //     products: [],
-  //   }
-  // },
 }
 </script>
 
