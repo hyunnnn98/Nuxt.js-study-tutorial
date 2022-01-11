@@ -1,21 +1,19 @@
 <template>
   <div>
-    <header>
-      <h1>
-        <NuxtLink to="/">Nuxt Shopping</NuxtLink>
-      </h1>
-      <Nuxt/>
-    </header>
+    <AppHeader />
+    <Nuxt />
   </div>
 </template>
 
 <script>
+import AppHeader from '~/components/AppHeader.vue'
 export default {
-  created () {
+  components: { AppHeader },
+  created() {
     // console.log(this.$route);
   },
 }
 </script>
 
-<style>
+<style scoped>
 </style>

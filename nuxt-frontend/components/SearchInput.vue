@@ -1,8 +1,13 @@
 <template>
-  <div>
+  <div class="input-wrapper flex">
     <!-- 동적 이벤트 감지를 통한 상위 컴포넌트 데이터 전송 -->
-    <input type="text" :value="value" @input="updateInput" />
-    <button type="buttton" @click="$emit('search')">search</button>
+    <input
+      class="search-input"
+      type="text"
+      :value="value"
+      @input="updateInput"
+    />
+    <button class="btn" type="buttton" @click="$emit('search')">search</button>
   </div>
 </template>
 
@@ -20,7 +25,7 @@ export default {
   },
   methods: {
     updateInput(event) {
-    //   console.log(this.constructor.name + '에서 입력중')
+      //   console.log(this.constructor.name + '에서 입력중')
       const inputValue = event.target.value
       this.$emit('input', inputValue)
     },
@@ -28,5 +33,20 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.input-wrapper {
+  height: 40px;
+  margin: 1rem 0;
+}
+.search-input {
+  width: 200px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.btn {
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-color: white;
+  border-radius: 50px;
+}
 </style>
