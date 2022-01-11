@@ -2,7 +2,7 @@
   <div>
     <!-- 동적 이벤트 감지를 통한 상위 컴포넌트 데이터 전송 -->
     <input type="text" :value="value" @input="updateInput" />
-    <button>search</button>
+    <button type="buttton" @click="$emit('search')">search</button>
   </div>
 </template>
 
@@ -20,10 +20,9 @@ export default {
   },
   methods: {
     updateInput(event) {
-      console.log(this.constructor.name + '에서 입력중')
+    //   console.log(this.constructor.name + '에서 입력중')
       const inputValue = event.target.value
       this.$emit('input', inputValue)
-      //   $emit('input', $event.target.value)
     },
   },
 }

@@ -7,7 +7,7 @@
         @input="updateSearchKeyword"
       /> -->
       <!-- 🤔 v-model 을 사용한 코드 코드 -->
-      <SearchInput v-model="searchKeyword" />
+      <SearchInput v-model="searchKeyword" @search="searchProducts" />
       <ul>
         <li
           v-for="product in products"
@@ -31,6 +31,7 @@
 <script>
 import axios from 'axios'
 import SearchInput from '@/components/SearchInput.vue'
+import { fetchProductByKeyword } from '~/api'
 
 export default {
   components: { SearchInput },
@@ -53,12 +54,20 @@ export default {
 
   methods: {
     moveToDetailPage(productId) {
-      console.log(productId)
+      // console.log(productId)
       this.$router.push(`detail/${productId}`)
     },
-    updateSearchKeyword(keyword) {
-      this.searchKeyword = keyword
+    async searchProducts() {
+      const { data } = await fetchProductByKeyword(this.searchKeyword)
+      // console.log(data)
+      this.products = data.map((item) => ({
+      ...item,
+      imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+    }))
     },
+    // updateSearchKeyword(keyword) {
+    //   this.searchKeyword = keyword
+    // },
   },
 }
 </script>
