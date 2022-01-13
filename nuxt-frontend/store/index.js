@@ -29,13 +29,13 @@ export const actions = {
             commit('addCartItem', item)
         })
     },
-    async nuxtServerInit(storeContext, nuxtContext) {
-        await storeContext.dispatch(FETCH_CART_ITEMS)
-        // 💡 위 코드와 동일한 로직. 깔끔하게 dispatch로 불러와서 적용하자.
-        // const { data: cartItems } = await fetchCartItems()
-        // storeContext.commit('initCartItems')
-        // cartItems.forEach(item => {
-        //     storeContext.commit('addCartItem', item)
-        // })
-    }
+    // async nuxtServerInit(storeContext, nuxtContext) {
+    //     await storeContext.dispatch(FETCH_CART_ITEMS)
+    //     // 💡 위 코드와 동일한 로직. 깔끔하게 dispatch로 불러와서 적용하자.
+    //     // const { data: cartItems } = await fetchCartItems()
+    //     // storeContext.commit('initCartItems')
+    //     // cartItems.forEach(item => {
+    //     //     storeContext.commit('addCartItem', item)
+    //     // })
+    // }
 }
