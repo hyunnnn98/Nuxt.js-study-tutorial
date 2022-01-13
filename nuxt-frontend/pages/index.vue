@@ -98,6 +98,7 @@ export default {
 .product-image {
   width: 400px;
   height: 250px;
+  border-radius: 20px;
 }
 
 .app {

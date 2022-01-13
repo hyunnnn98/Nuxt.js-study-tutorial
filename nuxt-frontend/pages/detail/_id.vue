@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     addToCart() {
-      console.log('페이지 이동 메서드 실행')
+      this.$store.commit('addCartItem', this.product);
       this.$router.push('/cart')
     },
   },
