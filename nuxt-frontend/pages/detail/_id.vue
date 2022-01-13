@@ -11,7 +11,7 @@
       <div class="side-panel">
         <p class="name">{{ product.name }}</p>
         <p class="price">{{ product.price }}</p>
-        <!-- <button type="button" @click="addToCart">Add to Cart</button> -->
+        <button type="button" @click="addToCart">Add to Cart</button>
       </div>
     </div>
   </div>
@@ -27,6 +27,12 @@ export default {
     const product = response.data
     // console.log(product)
     return { product }
+  },
+  methods: {
+    addToCart() {
+      console.log('페이지 이동 메서드 실행')
+      this.$router.push('/cart')
+    },
   },
   // created() {
   //   console.log(this.$route)

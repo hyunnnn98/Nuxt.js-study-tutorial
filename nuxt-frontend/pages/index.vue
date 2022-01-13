@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <GotoCartBtn />
     <main>
       <!-- 🤔 v-model 을 사용하지 않는 코드 -->
       <!-- <SearchInput
@@ -8,7 +9,7 @@
       /> -->
       <!-- 🤔 v-model 을 사용한 코드 코드 -->
       <SearchInput v-model="searchKeyword" @search="searchProducts" />
-      <ul>
+      <ul class="product-wrapper">
         <li
           v-for="product in products"
           :key="product.id"
@@ -32,9 +33,10 @@
 import axios from 'axios'
 import SearchInput from '@/components/SearchInput.vue'
 import { fetchProductByKeyword } from '~/api'
+import GotoCartBtn from '~/components/GotoCartBtn.vue'
 
 export default {
-  components: { SearchInput },
+  components: { SearchInput, GotoCartBtn },
   async asyncData() {
     const response = await axios.get('http://localhost:3000/products')
     // console.log(response)
@@ -61,9 +63,9 @@ export default {
       const { data } = await fetchProductByKeyword(this.searchKeyword)
       // console.log(data)
       this.products = data.map((item) => ({
-      ...item,
-      imageUrl: `${item.imageUrl}?random=${Math.random()}`,
-    }))
+        ...item,
+        imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+      }))
     },
     // updateSearchKeyword(keyword) {
     //   this.searchKeyword = keyword
@@ -77,6 +79,13 @@ export default {
   display: flex;
   justify-content: center;
 }
+
+.product-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .item {
   display: inline-block;
   width: 400px;
@@ -85,13 +94,16 @@ export default {
   margin: 0 0.5rem;
   cursor: pointer;
 }
+
 .product-image {
   width: 400px;
   height: 250px;
 }
+
 .app {
   position: relative;
 }
+
 .cart-wrapper {
   position: sticky;
   float: right;
