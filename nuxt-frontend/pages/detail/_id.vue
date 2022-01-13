@@ -11,14 +11,14 @@
       <div class="side-panel">
         <p class="name">{{ product.name }}</p>
         <p class="price">{{ product.price }}</p>
-        <button type="button" @click="addToCart">Add to Cart</button>
+        <button type="button" @click="addToCart">카트에 담기</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { fetchProductById } from '@/api/index'
+import { createCartItem, fetchProductById } from '@/api/index'
 export default {
   async asyncData({ params }) {
     const productId = params.id
@@ -29,8 +29,14 @@ export default {
     return { product }
   },
   methods: {
-    addToCart() {
-      this.$store.commit('addCartItem', this.product);
+    async addToCart() {
+      await createCartItem(this.product)
+      // console.log('res :', response.status)
+      // if (!response.ok) {
+      //   // throw new Error(`HTTP error! status: ${response.status}`)
+      //   console.log('카트 저장에 실패하였습니다.')
+      // }
+      this.$store.commit('addCartItem', this.product)
       this.$router.push('/cart')
     },
   },
